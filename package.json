@@ -1,0 +1,20 @@
+{
+  "name": "pass-in",
+  "version": "1.0.0",
+  "description": "O pass.in é uma aplicação de **gestão de participantes em eventos presenciais**.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.4",
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "fastify": "4.26.2"
+  } 
+} 
