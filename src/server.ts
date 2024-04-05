@@ -9,26 +9,6 @@ const prisma = new PrismaClient({
   log: ["query"],
 });
 
-// Métodos HTTP: GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS, ...
-
-// Corpo da requisição (Request Body)
-// Parâmetros de busca (Search Params / Query Params) 'http://IocaIhost:3333/users?name=Diegos
-// Parâmetros de rota (Route Params) -> Identificação de recursos 'DELETE http://IocaIhost:3333/users/5
-// Cabeçalhos (Headers) -> Contexto
-
-// Semânticas Significado
-
-// Driver nativo / Query Builders / ORMS
-
-// Object Relatianal Mapping (Hibernate / Doctrine / ActiveRecord)
-
-// JSON - JavaScript Object Notation
-
-// 20x => Sucesso
-// 30x => Redirecionamento
-// 40x => Erro do cliente (Erro em alguma informação enviada por QUEM está fazendo a chamada p/ API)
-// 50x => Erro do servidor (Um erro que está acontecendo INDEPENDENTE do que este sendo enviado p/ o servidor)
-
 app.post("/events", async (request, reply) => {
   const createEventSchema = z.object({
     title: z.string().min(4),
