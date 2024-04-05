@@ -11,10 +11,11 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.12.4",
+    "prisma": "^5.12.1",
     "tsx": "^4.7.2",
     "typescript": "^5.4.3"
   },
   "dependencies": {
-    "fastify": "4.26.2"
-  } 
-} 
+    "fastify": "^4.26.2"
+  }
+}
