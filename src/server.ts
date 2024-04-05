@@ -1,12 +1,13 @@
 import fastify from "fastify";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
+import { generateSlug } from "./utils/generate-slug";
 
-const app = fastify()
+const app = fastify();
 
 const prisma = new PrismaClient({
-    log: ['query'],
-})
+  log: ["query"],
+});
 
 // Métodos HTTP: GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS, ...
 
@@ -23,28 +24,46 @@ const prisma = new PrismaClient({
 
 // JSON - JavaScript Object Notation
 
-app.post('/events', async (request, reply) => {
-    const createEventSchema = z.object({
-        title: z.string().min(4),
-        details: z.string().nullable(),
-        maximumAttendees: z.number().int().positive().nullable(),
-    })
+// 20x => Sucesso
+// 30x => Redirecionamento
+// 40x => Erro do cliente (Erro em alguma informação enviada por QUEM está fazendo a chamada p/ API)
+// 50x => Erro do servidor (Um erro que está acontecendo INDEPENDENTE do que este sendo enviado p/ o servidor)
 
-    const data = createEventSchema.parse(request.body)
+app.post("/events", async (request, reply) => {
+  const createEventSchema = z.object({
+    title: z.string().min(4),
+    details: z.string().nullable(),
+    maximumAttendees: z.number().int().positive().nullable(),
+  });
 
-    const event = await prisma.event.create({
-        data: {
-            title: data.title,
-            details: data.details,
-            maximunAttendees: data.maximumAttendees,
-            slug: new Date().toISOString(),
-        },
-    })
+  const { title, details, maximumAttendees } = createEventSchema.parse(
+    request.body
+  );
 
-    return reply.status(201).send({ eventId: event.id })
-})
+  const slug = generateSlug(title);
 
-app.listen({port: 3333})
-.then(() => {
-    console.log("HTTP server running!")
-})
+  const eventWithSameSlug = await prisma.event.findUnique({
+    where: {
+      slug: slug,
+    },
+  });
+
+  if (eventWithSameSlug !== null) {
+    throw new Error("Another event with same title already exists.");
+  }
+
+  const event = await prisma.event.create({
+    data: {
+      title: title,
+      details: details,
+      maximunAttendees: maximumAttendees,
+      slug: slug,
+    },
+  });
+
+  return reply.status(201).send({ eventId: event.id });
+});
+
+app.listen({ port: 3333 }).then(() => {
+  console.log("HTTP server running!");
+});
