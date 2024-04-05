@@ -9,3 +9,13 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Event {
+  id               String  @id @default(uuid())
+  title            String
+  details          String?
+  slug             String  @unique
+  maximunAttendees Int?    @map("maximum_attendees")
+
+  @@map("events")
+}
