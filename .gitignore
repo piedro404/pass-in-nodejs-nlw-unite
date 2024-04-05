@@ -25,6 +25,7 @@ dist-ssr
 
 ## DataBase
 prisma/migrations/
-prisma/dev.db
+prisma/*.db
+prisma/*.db-journal
 
 
