@@ -28,7 +28,7 @@ export async function createEvent(app: FastifyInstance) {
 
       const eventWithSameSlug = await prisma.event.findUnique({
         where: {
-          slug: slug,
+          slug,
         },
       });
 
@@ -38,10 +38,10 @@ export async function createEvent(app: FastifyInstance) {
 
       const event = await prisma.event.create({
         data: {
-          title: title,
-          details: details,
-          maximunAttendees: maximumAttendees,
-          slug: slug,
+          title,
+          details,
+          maximumAttendees,
+          slug,
         },
       });
 
