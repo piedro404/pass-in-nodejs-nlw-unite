@@ -7,7 +7,6 @@ Content-Type: application/json
     "maximumAttendees": 100
 }
 
-
 ###
 
 POST http://localhost:3333/events/63da071e-e6c3-4188-80c5-7fafdb21494c/attendees
@@ -17,3 +16,8 @@ Content-Type: application/json
     "name": "Pedro Henrique Martins Borges",
     "email": "pedroplayborges2@gmail.com"
 }
+
+
+###
+
+GET http://localhost:3333/events/63da071e-e6c3-4188-80c5-7fafdb21494c
