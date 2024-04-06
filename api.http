@@ -6,3 +6,14 @@ Content-Type: application/json
     "details": "Um evento para quem é apaxionado por programação",
     "maximumAttendees": 100
 }
+
+
+###
+
+POST http://localhost:3333/events/ffd9470b-5c50-4024-a81e-5a73444747de/attendees
+Content-Type: application/json
+
+{
+    "name": "Pedro Henrique Martins Borges",
+    "email": "pedroplayborges@gmail.com"
+}
