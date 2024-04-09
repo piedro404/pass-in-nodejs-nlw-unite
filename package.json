@@ -19,6 +19,8 @@
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^3.0.0",
     "@prisma/client": "^5.12.1",
     "fastify": "^4.26.2",
     "fastify-type-provider-zod": "^1.1.9",
